@@ -1,0 +1,19 @@
+.home-conductor {
+  background: linear-gradient(to bottom right, #1C2541, #0B132B);
+  color: white;
+  height: 100vh;
+  padding: 2rem;
+  text-align: center;
+}
+
+h1 {
+  color: #5BC0BE;
+}
+
+footer {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  color: #aaa;
+  font-size: 0.9rem;
+}
