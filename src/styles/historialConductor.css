@@ -1,0 +1,132 @@
+.historial-conductor {
+  background: rgba(28, 37, 65, 0.9);
+  border: 1px solid rgba(91, 192, 190, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  color: white;
+}
+
+.historial-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.historial-header h3 {
+  color: #5BC0BE;
+  margin: 0;
+}
+
+.filtros-historial {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.filtro-btn {
+  background: rgba(91, 192, 190, 0.1);
+  border: 1px solid rgba(91, 192, 190, 0.2);
+  color: #999;
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filtro-btn:hover {
+  background: rgba(91, 192, 190, 0.2);
+}
+
+.filtro-btn.activo {
+  background: #5BC0BE;
+  color: #0B132B;
+  border-color: #5BC0BE;
+}
+
+.historial-card {
+  background: rgba(91, 192, 190, 0.1);
+  border: 1px solid rgba(91, 192, 190, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  transition: all 0.2s;
+}
+
+.historial-card:hover {
+  background: rgba(91, 192, 190, 0.15);
+}
+
+.historial-info-principal h4 {
+  margin: 0 0 0.5rem 0;
+  color: #5BC0BE;
+  font-size: 1.1rem;
+}
+
+.historial-detalles {
+  display: flex;
+  gap: 1rem;
+  color: #999;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.historial-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.stat-label {
+  color: #999;
+  font-size: 0.9rem;
+}
+
+.stat-valor {
+  color: #5BC0BE;
+  font-weight: 500;
+}
+
+.historial-estado {
+  margin-bottom: 1rem;
+}
+
+.estado-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.9rem;
+}
+
+.estado-badge.completado {
+  background: rgba(91, 192, 190, 0.2);
+  color: #5BC0BE;
+}
+
+.estado-badge.cancelado {
+  background: rgba(255, 99, 71, 0.2);
+  color: tomato;
+}
+
+.btn-detalles {
+  width: 100%;
+  padding: 0.75rem;
+  background: rgba(91, 192, 190, 0.1);
+  border: 1px solid rgba(91, 192, 190, 0.2);
+  border-radius: 8px;
+  color: #5BC0BE;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-detalles:hover {
+  background: rgba(91, 192, 190, 0.2);
+}

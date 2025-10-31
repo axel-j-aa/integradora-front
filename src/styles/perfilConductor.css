@@ -1,0 +1,112 @@
+.perfil-conductor {
+  background: rgba(28, 37, 65, 0.9);
+  border: 1px solid rgba(91, 192, 190, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  color: white;
+}
+
+.perfil-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.perfil-foto {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(91, 192, 190, 0.1);
+  border: 2px solid #5BC0BE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+.perfil-info-principal h2 {
+  margin: 0 0 0.5rem 0;
+  color: #5BC0BE;
+}
+
+.perfil-rating {
+  display: flex;
+  gap: 1rem;
+  color: #999;
+}
+
+.rating-valor {
+  color: #5BC0BE;
+}
+
+.perfil-seccion {
+  margin-bottom: 2rem;
+}
+
+.perfil-seccion h3 {
+  color: #5BC0BE;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.info-item {
+  background: rgba(91, 192, 190, 0.1);
+  border: 1px solid rgba(91, 192, 190, 0.2);
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.info-label {
+  color: #999;
+  font-size: 0.9rem;
+}
+
+.info-valor {
+  color: white;
+  font-weight: 500;
+}
+
+.perfil-acciones {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.btn-editar,
+.btn-documentos {
+  flex: 1;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-editar {
+  background: #5BC0BE;
+  color: #0B132B;
+}
+
+.btn-editar:hover {
+  background: #4DA3A1;
+}
+
+.btn-documentos {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.btn-documentos:hover {
+  background: rgba(255, 255, 255, 0.2);
+}

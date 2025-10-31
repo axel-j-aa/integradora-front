@@ -1,0 +1,281 @@
+/* src/styles/pasajero/mapaRutas.css */
+.mapa-rutas {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.mapa-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 1rem 0;
+}
+
+.mapa-header h1 {
+  font-size: 2.5rem;
+  color: #5bc0be;
+  margin-bottom: 0.5rem;
+}
+
+.mapa-header p {
+  color: #cccccc;
+  font-size: 1.1rem;
+}
+
+.filtros-rapidos {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.filtro-btn {
+  background: rgba(91, 192, 190, 0.1);
+  border: 1px solid rgba(91, 192, 190, 0.3);
+  color: #5bc0be;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.filtro-btn.active,
+.filtro-btn:hover {
+  background: #5bc0be;
+  color: #0b132b;
+}
+
+.mapa-container {
+  background: rgba(28, 37, 65, 0.9);
+  border: 1px solid rgba(91, 192, 190, 0.2);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  min-height: 500px;
+  position: relative;
+}
+
+.mapa-placeholder-interactivo {
+  width: 100%;
+  height: 400px;
+  background: linear-gradient(135deg, #1c2541, #0b132b);
+  border-radius: 8px;
+  position: relative;
+  border: 2px dashed rgba(91, 192, 190, 0.3);
+}
+
+.puntos-referencia {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.punto {
+  position: absolute;
+  background: rgba(91, 192, 190, 0.2);
+  border: 2px solid #5bc0be;
+  border-radius: 8px;
+  padding: 0.5rem;
+  color: white;
+  font-size: 0.8rem;
+  transform: translate(-50%, -50%);
+}
+
+.marcador-ruta {
+  position: absolute;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease;
+}
+
+.marcador-ruta:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  z-index: 10;
+}
+
+.marcador-punto {
+  width: 20px;
+  height: 20px;
+  background: #5bc0be;
+  border: 3px solid #0b132b;
+  border-radius: 50%;
+  margin: 0 auto 0.5rem;
+  box-shadow: 0 2px 8px rgba(91, 192, 190, 0.5);
+}
+
+.marcador-info {
+  background: rgba(11, 19, 43, 0.95);
+  border: 1px solid #5bc0be;
+  border-radius: 8px;
+  padding: 0.5rem;
+  min-width: 100px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+
+.precio {
+  color: #5bc0be;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.asientos {
+  color: #cccccc;
+  font-size: 0.8rem;
+}
+
+.info-horario {
+  color: #999;
+  font-size: 0.7rem;
+}
+
+.mapa-leyenda {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.leyenda-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #cccccc;
+  font-size: 0.9rem;
+}
+
+.leyenda-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+}
+
+.leyenda-color.disponible {
+  background: #5bc0be;
+}
+
+.leyenda-color.proxima {
+  background: #f4d03f;
+}
+
+.leyenda-color.economica {
+  background: #4caf50;
+}
+
+.rutas-lista h3 {
+  color: #5bc0be;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.rutas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.ruta-mini-card {
+  background: rgba(28, 37, 65, 0.9);
+  border: 1px solid rgba(91, 192, 190, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.ruta-mini-card:hover {
+  border-color: #5bc0be;
+  transform: translateY(-2px);
+}
+
+.ruta-mini-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.ruta-mini-header h4 {
+  margin: 0;
+  color: white;
+}
+
+.rating-mini {
+  color: #f4d03f;
+  font-size: 0.9rem;
+}
+
+.ruta-mini-ruta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.origen-mini, .destino-mini {
+  font-size: 0.9rem;
+  color: #cccccc;
+}
+
+.ruta-mini-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #999;
+}
+
+.precio-mini {
+  color: #5bc0be;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.btn-ver-detalles {
+  width: 100%;
+  background: rgba(91, 192, 190, 0.1);
+  color: #5bc0be;
+  border: 1px solid #5bc0be;
+  padding: 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.btn-ver-detalles:hover {
+  background: #5bc0be;
+  color: #0b132b;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .mapa-container {
+    padding: 1rem;
+  }
+  
+  .mapa-placeholder-interactivo {
+    height: 300px;
+  }
+  
+  .rutas-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .mapa-leyenda {
+    gap: 1rem;
+  }
+}

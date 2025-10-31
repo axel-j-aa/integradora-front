@@ -1,0 +1,147 @@
+.notificaciones-conductor {
+  background: rgba(28, 37, 65, 0.9);
+  border: 1px solid rgba(91, 192, 190, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  color: white;
+  max-height: 600px;
+  display: flex;
+  flex-direction: column;
+}
+
+.notificaciones-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.notificaciones-header h3 {
+  color: #5BC0BE;
+  margin: 0;
+}
+
+.btn-marcar-leidas {
+  background: none;
+  border: none;
+  color: #5BC0BE;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0;
+}
+
+.btn-marcar-leidas:hover {
+  text-decoration: underline;
+}
+
+.notificaciones-lista {
+  flex: 1;
+  overflow-y: auto;
+  margin: -0.5rem;
+  padding: 0.5rem;
+}
+
+.notificacion-card {
+  background: rgba(91, 192, 190, 0.1);
+  border: 1px solid rgba(91, 192, 190, 0.2);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 1rem;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.notificacion-card:hover {
+  background: rgba(91, 192, 190, 0.15);
+}
+
+.notificacion-card.leida {
+  opacity: 0.7;
+}
+
+.notificacion-icon {
+  font-size: 1.5rem;
+  min-width: 32px;
+  text-align: center;
+}
+
+.notificacion-contenido {
+  flex: 1;
+}
+
+.notificacion-encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: 0.5rem;
+}
+
+.notificacion-encabezado h4 {
+  margin: 0;
+  color: #5BC0BE;
+  font-size: 1rem;
+}
+
+.notificacion-tiempo {
+  color: #999;
+  font-size: 0.85rem;
+}
+
+.notificacion-mensaje {
+  margin: 0;
+  color: #ccc;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.notificacion-indicador {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #5BC0BE;
+}
+
+.notificaciones-footer {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.btn-ver-todas {
+  width: 100%;
+  padding: 0.75rem;
+  background: rgba(91, 192, 190, 0.1);
+  border: 1px solid rgba(91, 192, 190, 0.2);
+  border-radius: 8px;
+  color: #5BC0BE;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-ver-todas:hover {
+  background: rgba(91, 192, 190, 0.2);
+}
+
+/* Scrollbar styles */
+.notificaciones-lista::-webkit-scrollbar {
+  width: 6px;
+}
+
+.notificaciones-lista::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.notificaciones-lista::-webkit-scrollbar-thumb {
+  background: rgba(91, 192, 190, 0.5);
+  border-radius: 3px;
+}
+
+.notificaciones-lista::-webkit-scrollbar-thumb:hover {
+  background: rgba(91, 192, 190, 0.7);
+}

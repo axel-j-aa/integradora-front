@@ -1,0 +1,72 @@
+.header {
+  height: 60px;
+  background: linear-gradient(90deg, #0b132b, #1c2541);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.menu-btn {
+  background: none;
+  border: none;
+  color: #5bc0be;
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+.menu-btn:hover {
+  background: rgba(91, 192, 190, 0.15);
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.logo-img {
+  width: 28px;
+  height: 28px;
+  filter: drop-shadow(0 0 4px rgba(91, 192, 190, 0.6));
+}
+.header-title h1 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #eaf6f6;
+}
+.header-title span {
+  color: #5bc0be;
+  text-shadow: 0 0 6px rgba(91, 192, 190, 0.5);
+}
+
+/* Correo del usuario */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-email {
+  font-size: 0.9rem;
+  color: #cceeff;
+  background: rgba(91, 192, 190, 0.15);
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .user-email {
+    display: none;
+  }
+}
