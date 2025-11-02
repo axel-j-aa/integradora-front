@@ -1,4 +1,3 @@
-// src/pages/Login.js
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/login.css";
@@ -6,155 +5,125 @@ import "../styles/login.css";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  // 🧠 Si ya hay sesión, redirige automáticamente
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("colibri:user"));
-    if (user) {
-      if (user.role === "Conductor") navigate("/conductor");
-      else if (user.role === "Pasajero") navigate("/pasajero");
+    const storedUser = JSON.parse(localStorage.getItem("colibri:user"));
+    if (storedUser && storedUser.role) {
+      if (storedUser.role === "Conductor") navigate("/conductor");
+      else if (storedUser.role === "Pasajero") navigate("/pasajero");
     }
   }, [navigate]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    
-    // 🔐 Credenciales hardcodeadas para desarrollo
-    if (email === "pasajero@colibri.com" && password === "123456") {
-      const userData = {
-        success: true,
-        name: "Ana García",
-        email: "pasajero@colibri.com",
-        role: "Pasajero",
-        id: 1
-      };
-      localStorage.setItem("colibri:user", JSON.stringify(userData));
-      navigate("/pasajero");
-      return;
-    }
-    
-    if (email === "conductor@colibri.com" && password === "123456") {
-      const userData = {
-        success: true,
-        name: "Juan Pérez",
-        email: "conductor@colibri.com", 
-        role: "Conductor",
-        id: 2
-      };
-      localStorage.setItem("colibri:user", JSON.stringify(userData));
-      navigate("/conductor");
-      return;
-    }
+    setMessage("");
+    setLoading(true);
 
-    // Si no son las credenciales de prueba, intentar con el backend
     try {
       const res = await fetch("http://localhost:3000/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-      
+
+      const data = await res.json();
+
       if (res.ok) {
-        const data = await res.json();
-        if (data.success) {
-          localStorage.setItem("colibri:user", JSON.stringify(data));
-          if (data.role === "Conductor") navigate("/conductor");
-          else if (data.role === "Pasajero") navigate("/pasajero");
-        } else {
-          setMessage(data.message || "Error en el login");
-        }
+        let roleName = "";
+        if (data.user.role === 1) roleName = "Pasajero";
+        else if (data.user.role === 2) roleName = "Conductor";
+        else roleName = "Usuario";
+
+        const userData = { ...data.user, role: roleName };
+        localStorage.setItem("colibri:user", JSON.stringify(userData));
+        localStorage.setItem("colibri:access_token", data.access_token);
+        localStorage.setItem("colibri:refresh_token", data.refresh_token);
+
+        if (roleName === "Conductor") navigate("/conductor");
+        else if (roleName === "Pasajero") navigate("/pasajero");
+        else navigate("/");
       } else {
-        setMessage("Error del servidor. Usando modo desarrollo...");
-        // Fallback a credenciales de desarrollo
-        if (email.includes("pasajero") && password === "123456") {
-          const userData = {
-            success: true,
-            name: "Usuario Pasajero",
-            email: email,
-            role: "Pasajero",
-            id: Date.now()
-          };
-          localStorage.setItem("colibri:user", JSON.stringify(userData));
-          navigate("/pasajero");
-        } else if (email.includes("conductor") && password === "123456") {
-          const userData = {
-            success: true,
-            name: "Usuario Conductor", 
-            email: email,
-            role: "Conductor",
-            id: Date.now()
-          };
-          localStorage.setItem("colibri:user", JSON.stringify(userData));
-          navigate("/conductor");
-        } else {
-          setMessage("Credenciales incorrectas. Usa: pasajero@colibri.com / 123456");
-        }
+        setMessage(data.message || "Credenciales inválidas");
       }
     } catch (error) {
-      console.log("Error de conexión, usando modo desarrollo...");
-      // Modo desarrollo - credenciales básicas
-      if (password === "123456") {
-        const userData = {
-          success: true,
-          name: email.includes("pasajero") ? "Usuario Pasajero" : "Usuario Conductor",
-          email: email,
-          role: email.includes("pasajero") ? "Pasajero" : "Conductor",
-          id: Date.now()
-        };
-        localStorage.setItem("colibri:user", JSON.stringify(userData));
-        
-        if (email.includes("pasajero")) {
-          navigate("/pasajero");
-        } else {
-          navigate("/conductor");
-        }
-      } else {
-        setMessage("Error de conexión. Usa contraseña: 123456");
-      }
+      console.error("Error al iniciar sesión:", error);
+      setMessage("Error al conectar con el servidor.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="login-container">
       <div className="login-card">
-        <h1 className="login-title">🕊️ Plataforma Colibrí</h1>
-        <p className="subtitle">Agencia de Movilidad</p>
+        <div className="login-header">
+          {/* ✅ Logo cargado directamente desde /public */}
+          <div className="logo-circle">
+            <img
+              src="/colibri.png"
+              alt="Logo Colibrí"
+              className="logo-img"
+            />
+          </div>
 
-        <form onSubmit={handleLogin}>
-          <input
-            type="email"
-            placeholder="Correo electrónico"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <input
-            type="password"
-            placeholder="Contraseña"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <button type="submit">Iniciar sesión</button>
+          <h1>Bienvenido</h1>
+          <p>Ingresa a tu cuenta para continuar tu viaje</p>
+        </div>
+
+        <form onSubmit={handleLogin} className="login-form">
+          <label htmlFor="email" className="input-label">
+            Correo electrónico
+          </label>
+          <div className="input-group">
+            <input
+              id="email"
+              type="email"
+              placeholder="ejemplo@correo.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+
+          <label htmlFor="password" className="input-label">
+            Contraseña
+          </label>
+          <div className="input-group">
+            <input
+              id="password"
+              type={showPassword ? "text" : "password"}
+              placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <button
+              type="button"
+              className="show-password"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? "Ocultar" : "Mostrar"}
+            </button>
+          </div>
+
+          <a href="#" className="forgot-password">
+            ¿Olvidaste tu contraseña?
+          </a>
+
+          <button type="submit" className="btn-login" disabled={loading}>
+            {loading ? "Iniciando..." : "Iniciar sesión"}
+          </button>
+
+          <p className="register-text">
+            ¿No tienes cuenta? <a href="/rol">Regístrate aquí</a>
+          </p>
         </form>
 
         {message && <p className="msg">{message}</p>}
-
-        {/* Información de credenciales de prueba */}
-        <div className="dev-credentials">
-          <h4>Credenciales de Prueba:</h4>
-          <div className="credential-item">
-            <strong>Pasajero:</strong> pasajero@colibri.com / 123456
-          </div>
-          <div className="credential-item">
-            <strong>Conductor:</strong> conductor@colibri.com / 123456
-          </div>
-          <div className="credential-item">
-            <strong>Cualquier email</strong> con contraseña: 123456
-          </div>
-        </div>
       </div>
     </div>
   );
