@@ -11,6 +11,8 @@ import HistorialViajes from "./pages/pasajero/HistorialViajes";
 import PerfilPasajero from "./pages/pasajero/PerfilPasajero";
 import Billetera from "./pages/pasajero/Billetera";
 import SolicitarViaje from "./pages/pasajero/SolicitarViaje";
+import Rol from "./pages/Rol";
+import Registro from "./pages/Registro";
 
 export default function App() {
   return (
@@ -18,7 +20,8 @@ export default function App() {
       <Routes>
         {/* Página de inicio (login) */}
         <Route path="/" element={<Login />} />
-
+        <Route path="/Rol" element={<Rol />} />
+        <Route path="/Registro" element={<Registro />} />
         {/* Rutas del pasajero */}
         <Route
           path="/pasajero"
