@@ -9,7 +9,6 @@ export default function Login() {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-  // 🧠 Si ya hay sesión, redirige automáticamente
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("colibri:user"));
     if (user) {
@@ -21,7 +20,6 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     
-    // 🔐 Credenciales hardcodeadas para desarrollo
     if (email === "pasajero@colibri.com" && password === "123456") {
       const userData = {
         success: true,

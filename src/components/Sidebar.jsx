@@ -1,4 +1,3 @@
-// src/components/Sidebar.jsx
 import React from "react";
 import "../styles/sidebar.css";
 import { useNavigate, useLocation } from "react-router-dom";
