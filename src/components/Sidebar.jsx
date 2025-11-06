@@ -1,12 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/sidebar.css";
 import { useNavigate, useLocation } from "react-router-dom";
 
 export default function Sidebar({ onSelect, sidebarOpen }) {
   const navigate = useNavigate();
   const location = useLocation();
-  const userType = location.pathname.includes('/conductor') ? 'conductor' : 'pasajero';
+  const [user, setUser] = useState(null);
 
+  // ✅ Cargar usuario o redirigir al login si no existe
+  useEffect(() => {
+    const stored = localStorage.getItem("colibri:user");
+    if (stored) {
+      setUser(JSON.parse(stored));
+    } else {
+      navigate("/", { replace: true });
+    }
+  }, [navigate]);
+
+  // 🧠 Determinar tipo de usuario
+  let userType = "desconocido";
+  if (user?.role === "Usuario" || user?.role === 1) userType = "pasajero";
+  else if (user?.role === "Conductor" || user?.role === 3) userType = "conductor";
+
+  // 🚫 Evitar acceso a rutas no permitidas
+  useEffect(() => {
+    if (!userType || userType === "desconocido") return;
+
+    const path = location.pathname;
+
+    const isPasajeroRoute = path.startsWith("/pasajero");
+    const isConductorRoute = path.startsWith("/conductor");
+
+    if (userType === "pasajero" && !isPasajeroRoute) {
+      navigate("/pasajero/busqueda", { replace: true });
+    } else if (userType === "conductor" && !isConductorRoute) {
+      navigate("/conductor", { replace: true });
+    }
+  }, [userType, location.pathname, navigate]);
+
+  // === Opciones por rol ===
   const opcionesPasajero = [
     { icon: "🔍", label: "Buscar Rutas", path: "/pasajero/busqueda" },
     { icon: "🗺️", label: "Ver Mapa", path: "/pasajero/mapa" },
@@ -23,15 +55,24 @@ export default function Sidebar({ onSelect, sidebarOpen }) {
     { icon: "👤", label: "Mi Perfil", path: "/conductor", section: "perfil" },
   ];
 
-  const opciones = userType === 'conductor' ? opcionesConductor : opcionesPasajero;
+  const opciones =
+    userType === "conductor"
+      ? opcionesConductor
+      : userType === "pasajero"
+      ? opcionesPasajero
+      : [];
 
+  // === Cerrar sesión ===
   const handleLogout = () => {
     localStorage.removeItem("colibri:user");
+    localStorage.removeItem("colibri:access_token");
+    localStorage.removeItem("colibri:refresh_token");
     navigate("/", { replace: true });
   };
 
+  // === Navegación ===
   const handleNavigation = (op) => {
-    if (userType === 'conductor') {
+    if (userType === "conductor") {
       navigate(op.path, { state: { section: op.section } });
     } else {
       navigate(op.path);
@@ -41,18 +82,15 @@ export default function Sidebar({ onSelect, sidebarOpen }) {
 
   return (
     <aside className={`sidebar ${sidebarOpen ? "open" : ""}`}>
-      {userType === 'conductor' && (
+      {user && (
         <div className="conductor-profile">
           <div className="profile-image">
             <span className="profile-icon">👤</span>
           </div>
           <div className="profile-info">
-            <h3>Miguel Contreras</h3>
-            <div className="rating">
-              <span className="star">⭐</span>
-              <span>4.9</span>
-            </div>
-            <span className="status online">En línea</span>
+            <h3>{user.full_name || "Usuario"}</h3>
+            <p className="email">{user.email}</p>
+            <span className="status online">{userType}</span>
           </div>
         </div>
       )}
@@ -71,7 +109,6 @@ export default function Sidebar({ onSelect, sidebarOpen }) {
           </button>
         ))}
 
-        {/* Botón de cerrar sesión */}
         <div className="sidebar-footer">
           <button className="logout-btn" onClick={handleLogout}>
             🚪 Cerrar sesión
